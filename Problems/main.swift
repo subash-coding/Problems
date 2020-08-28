@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Solution {
+//Two Sum
+class Solution1 {
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         
         for i in 0..<nums.count {
@@ -23,4 +24,33 @@ class Solution {
     }
 }
 
-print(Solution().twoSum([3,2,4], 6))
+class Solution2{
+
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var store = Dictionary<Int,Int>()
+        for (index,value) in nums.enumerated() {
+            store[index] = value
+        }
+        var pairIndex = -1
+        for index in 0..<nums.count {
+            let complement = target - nums[index]
+           let found = store.contains { (key,value) -> Bool in
+                if key != index && value == complement {
+                    pairIndex = key
+                    return true
+                } else  {
+                    return false
+                }
+            }
+            if found {
+                return [index,pairIndex]
+            }
+            
+        }
+        return [-1,-1]
+      }
+}
+
+print(Solution1().twoSum([3,2,4], 6))
+print(Solution2().twoSum([3,2,4], 6))
+
